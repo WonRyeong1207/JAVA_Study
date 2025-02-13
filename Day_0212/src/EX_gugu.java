@@ -9,22 +9,49 @@ public class EX_gugu {
 
         // 구구단 출력
         // System.out.printf("---%d단--- \t", n+1);
-        for (int n = 1; n<10; n++) {
+        for (int n = 0; n<10; n++) {
             for (int i = 2; i<6; i++) {
-
-                System.out.printf("%d * %d = %d \t", i, n, i * n);
-
+                if (n==0) {
+                    System.out.printf("-- %d단 --  \t", i);
+                }
+                else {
+                    System.out.printf("%d * %d = %d \t", i, n, i * n);
+                }
             }
             System.out.print("\n");
         }
         System.out.print("\n");
-        for (int n = 1; n<10; n++) {
+        for (int n = 0; n<10; n++) {
             for (int i = 6; i<10; i++) {
-
-                System.out.printf("%d * %d = %d \t", i, n, i * n);
-
+                if (n==0) {
+                    System.out.printf("-- %d단 --  \t", i);
+                }
+                else {
+                    System.out.printf("%d * %d = %d \t", i, n, i * n);
+                }
             }
             System.out.print("\n");
+        }
+        System.out.print("\n\n");
+
+        // 마름모 출력
+        for (int i=0; i<5; i++) {
+            for (int j=0; j<5-i; j++) {
+                System.out.print(' ');
+            }
+            for (int k=0; k<2*i+1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<=i+1; j++) {
+                System.out.print(' ');
+            }
+            for (int k=7; k>=2*i+1; k--) {
+                System.out.print('*');
+            }
+            System.out.println();
         }
     }
 }
