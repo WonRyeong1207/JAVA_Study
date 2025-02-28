@@ -30,8 +30,9 @@ public class BankSystem {
     private final String B_NAME;
     private final String L_NAME;
     // private Account[] acc_arr = new Account[100];
-    private Account[] acc_arr = new ArrayList<Account>(0).toArray(new Account[0]);
+    private ArrayList<Account> acc_arr;
     private int reg_cnt;
+    private int max_num;
     private final String PREFIX = "BK-";
 
     // generator method
@@ -42,9 +43,10 @@ public class BankSystem {
     public BankSystem(String b_NAME, String l_NAME) {
         B_NAME = b_NAME;
         L_NAME = l_NAME;
+        acc_arr = new ArrayList<Account>();
     }
 
-    public BankSystem(String b_NAME, String l_NAME, Account[] acc_arr, int reg_cnt) {
+    public BankSystem(String b_NAME, String l_NAME, ArrayList<Account> acc_arr, int reg_cnt) {
         B_NAME = b_NAME;
         L_NAME = l_NAME;
         this.acc_arr = acc_arr;
@@ -58,7 +60,7 @@ public class BankSystem {
     public String getL_NAME() {
         return L_NAME;
     }
-    public Account[] getAcc_arr() {
+    public ArrayList<Account> getAcc_arr() {
         return acc_arr;
     }
     public int getReg_cnt() {
@@ -106,7 +108,7 @@ public class BankSystem {
         // 계좌 개설 날짜
         String createDT = ""+ LocalDate.now();
 
-        acc_arr[this.reg_cnt++] = new Account(accNum, owner, amount, createDT,this.L_NAME);
+        acc_arr.set(this.reg_cnt++, new Account(accNum, owner, amount, createDT, this.L_NAME));
 
         return true;
     }
@@ -131,7 +133,7 @@ public class BankSystem {
         // 계좌 개설 날짜
         String createDT = ""+ LocalDate.now();
 
-        acc_arr[this.reg_cnt++] = new Account(accNum, owner, amount, createDT,this.L_NAME);
+        acc_arr.set(this.reg_cnt++, new Account(accNum, owner, amount, createDT, this.L_NAME));
 
         return true;
     }
@@ -144,10 +146,19 @@ public class BankSystem {
     *   @Description : 계좌 목록이 있다면 출력, 전체 계좌 정보를 출력
     */
     public boolean listAccount() {
-        for (int idx=0; idx<this.reg_cnt; idx++) {
-            this.acc_arr[idx].printInfo();
+//        max_num = acc_arr.get(idx).size();
+//        for (int idx=0; idx<this.reg_cnt; idx++) {
+//            this.acc_arr.get(idx).printInfo();
+//        }
+//        return (this.reg_cnt > 0) ? true : false;
+        if (acc_arr.isEmpty()) {
+            return false;
         }
-        return (this.reg_cnt > 0) ? true : false;
+
+        for (Account acc : acc_arr) {
+            acc.printInfo();
+        }
+        return true;
     }
 
     /**
@@ -163,8 +174,8 @@ public class BankSystem {
         String accNum = scan.next();
 
         for (int i=0; i<this.reg_cnt; i++) {
-            if (this.acc_arr[i].getAcc_num().equals(accNum)) {
-                this.acc_arr[i].printInfo();
+            if (this.acc_arr.get(i).getAcc_num().equals(accNum)) {
+                this.acc_arr.get(i).printInfo();
                 break;
             }
             else {
@@ -191,9 +202,9 @@ public class BankSystem {
         int amount = scan.nextInt();
 
         for (int i=0; i<this.reg_cnt; i++) {
-            if (this.acc_arr[i].getAcc_num().equals(accNum)) {
-                amount += this.acc_arr[i].getBalance();
-                this.acc_arr[i].setBalance(amount);
+            if (this.acc_arr.get(i).getAcc_num().equals(accNum)) {
+                amount += this.acc_arr.get(i).getBalance();
+                this.acc_arr.get(i).setBalance(amount);
                 break;
             }
             else {
@@ -220,10 +231,10 @@ public class BankSystem {
         int amount = scan.nextInt();
 
         for (int i=0; i<this.reg_cnt; i++) {
-            if (this.acc_arr[i].getAcc_num().equals(accNum)) {
-                if (amount <= this.acc_arr[i].getBalance()) {
-                    amount =  this.acc_arr[i].getBalance() - amount;
-                    this.acc_arr[i].setBalance(amount);
+            if (this.acc_arr.get(i).getAcc_num().equals(accNum)) {
+                if (amount <= this.acc_arr.get(i).getBalance()) {
+                    amount =  this.acc_arr.get(i).getBalance() - amount;
+                    this.acc_arr.get(i).setBalance(amount);
                     break;
                 }
             }
