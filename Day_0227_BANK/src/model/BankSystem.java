@@ -3,6 +3,7 @@ package model;
 import message.Msg;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Scanner;
  * =========================================================
  * DATE                    AUTHOR            NOTE
  * 25. 2. 27. 오후 3:20     WonRyeong1207     FirstCreate
+ * 25. 2. 28. 오후 4:37     WonRyeong1207     Update Vector
  * ---------------------------------------------------------</pre>
  * @class_purpose : 은행 업무 관리 클래스
  * @class_name : BankSystem
@@ -27,7 +29,8 @@ public class BankSystem {
     // member attribute
     private final String B_NAME;
     private final String L_NAME;
-    private Account[] acc_arr = new Account[100];
+    // private Account[] acc_arr = new Account[100];
+    private Account[] acc_arr = new ArrayList<Account>(0).toArray(new Account[0]);
     private int reg_cnt;
     private final String PREFIX = "BK-";
 
